@@ -4,7 +4,7 @@ class Solution {
         if(i>=nums.size())return 0;
         if(dp[i][prev+1]!=-1)return dp[i][prev+1];
           int l1=0;
-           if(prev==-1||prev!=i-1)
+         //  if(prev==-1||prev!=i-1)
          l1=solve(i+2,i,nums,dp)+nums[i];
         
         int l2=solve(i+1,prev,nums,dp);
