@@ -43,7 +43,7 @@ public:
       
         vector<string>ans;
         sort(search.begin(),search.end());
-     //  cout<<search<<endl;
+    
         for(int i=0;i<words1.size(); i++)
         {
             string temp=words1[i];
