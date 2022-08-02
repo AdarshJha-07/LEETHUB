@@ -10,55 +10,39 @@
  * };
  */
 class Solution {
-public:
-    
-    TreeNode *getRightMost(TreeNode *root){
-        
-//         if(root == NULL){
-//             return NULL;
-//         }
-        
-        
-        while(root->right != NULL){
-            root = root->right;
-        }
-        
-        return root;
-    }
-    TreeNode* deleteNode(TreeNode* root, int key) {
-    
-        if(root == NULL){
-            return NULL;
-        }
-        
-        if(root->val > key){
-            root->left = deleteNode(root->left,key);
-        }
-        else if(root->val < key){
-            root->right = deleteNode(root->right,key);
-        }
+    TreeNode* del(TreeNode *root,int k){
+        if(root==NULL) return NULL ;
+         
+        if(root->val>k)
+       root->left= del(root->left,k);
+       else if(root->val<k)
+         root->right=  del(root->right,k);
         else{
             
-            if(root->left == NULL and root->right == NULL){
-                return NULL;
-            }
-            else if(root->left == NULL){
+            if(root->right==NULL){
+               // delete root;
+            return root->left;}
+            else if(root->left==NULL){
                 return root->right;
             }
-            else if(root->right == NULL){
-                return root->left;
-            }
             else{
-                
-                TreeNode *x = getRightMost(root->left);
-                
-                root->val = x->val;
-                
-                root->left = deleteNode(root->left,x->val);
-            }
+                TreeNode *curr=root->right;
+                while(curr->left!=NULL)
+                {
+                    curr=curr->left;
+                }
+                root->val=curr->val;
+               root->right=del(root->right, curr->val );
+        
+                }
         }
-        
-        
-        return root;
+    return root;
+    }
+public:
+    TreeNode* deleteNode(TreeNode* root, int key) {
+        if(root==NULL) return NULL;
+    
+     return   del(root,key);    
+      //  return root;
     }
 };
