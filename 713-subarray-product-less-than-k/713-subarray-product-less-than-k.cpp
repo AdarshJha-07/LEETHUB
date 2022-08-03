@@ -10,13 +10,13 @@ public:
         int cnt=0;
         for(int i=0;i<A.size(); i++){
              sum=sum*A[i];
-           if(sum>=k){
+           
                while(l<=i&&sum>=k){
                    sum=sum/A[l++];
               //l++;
                    //su
                }
-           }
+           
             cnt+=i-l+1;
         }
         return cnt;
