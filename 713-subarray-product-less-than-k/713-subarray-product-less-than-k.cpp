@@ -2,9 +2,9 @@ class Solution {
 public:
     int numSubarrayProductLessThanK(vector<int>& A, int k) {
     
-        vector<int>pre(A.size(),1);
+       
       
-        // unordered_map<int,int>ump;
+       
         int sum=1;
         int l = 0;
         int cnt=0;
