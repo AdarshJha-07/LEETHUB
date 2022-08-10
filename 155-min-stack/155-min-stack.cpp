@@ -1,54 +1,50 @@
 class MinStack {
+    long long minele;
+    stack<long long>st;
 public:
-    
-    
-    stack<long long> s;
-    
-    long long minValue;
-    
     MinStack() {
         
     }
     
     void push(int val) {
         
-        if(s.empty()){
-            s.push(val);
-            minValue = val;
+     if(st.empty()){
+         minele= (long long)val;
+         st.push(val);
+     }
+        else if(val>=minele){
+            st.push((long long)val);
         }
-        else if(val >= minValue){
-            s.push(val);
-        }
-        else{
-            long long x = (long long)val + (long long)val - minValue;
-            s.push(x);
-            minValue = val;
+        else if(val<minele){
+            st.push(1LL*2*val-minele);
+            minele=val;
         }
     }
     
     void pop() {
-        
-        long long val = s.top();
-        s.pop();
-        
-        if(val < minValue){
-            minValue = 1LL*2*minValue - val;
+      long long u=st.top();
+        if(u>=minele){
+            st.pop();
+        }
+        else{
+            minele=1LL*2*minele-u;
+            st.pop();
         }
     }
     
     int top() {
-        
-        if(s.top() >= minValue){
-            return s.top();
+     long long u=st.top();
+        if(u>=minele)return u;
+     
+        else if(u<minele){
+           
+         return minele;
         }
-        else{
-            return minValue;
-        }
-        
+    return u;
     }
     
     int getMin() {
-        return minValue;
+        return minele;
     }
 };
 
