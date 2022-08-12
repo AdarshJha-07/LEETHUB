@@ -21,10 +21,8 @@ public:
                     {
                         st.insert({nums[i],nums[j],nums[l],nums[h]});
                         int a1= nums[l],a2=nums[h];
-                        //while(l<h&&a1==nums[l])
-                        l++;
-                        //while(l<h&&a2==nums[h])
-                        h--;
+                        while(l<h&&a1==nums[l])l++;
+                        while(l<h&&a2==nums[h])h--;
                         
                     }
                     else if( temp<target )
