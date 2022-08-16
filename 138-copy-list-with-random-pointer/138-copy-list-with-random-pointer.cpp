@@ -17,30 +17,47 @@ public:
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
+      Node * temp = head,*prev = NULL;
         if(head==NULL)return NULL;
-        Node * newHead = new Node(head->val);
-        
-        Node * temp = head ,* temp2 = newHead;
-        unordered_map<Node*,Node*>ump;
-        ump[head] = newHead;
-        while(temp->next!=NULL){
-             
-            temp2->next = new Node( temp->next->val );
-            ump[temp->next]  = temp2->next ;
-            temp2 = temp2->next;
-            temp = temp->next;
+        while(temp)
+        {
+          prev =  temp->next;
+          temp->next = new Node(temp->val);
+           temp->next->next = prev;
+            temp = prev;
+              
         }
-       temp2 = newHead;
-        temp =head;
-        while(temp!=NULL){
        
-            if(ump.find(temp->random)!=ump.end())
-         temp2->random = ump[temp->random];  
-         else temp2->random = NULL;   
-            temp = temp->next;
-            temp2 = temp2->next;
+        temp = head;
+        Node* temp1 = temp->next;
+        while(temp){
+            
+        if(temp->random!=NULL)    temp1->random = temp->random->next;
+         else temp1->random = NULL;
+          
+            temp = temp->next->next;
+         if(temp==NULL)
+             break;
+            
+          temp1 = temp->next;
         }
+     
         
+        temp1 =head->next;
+        temp = head;
+        Node *newHead = temp1;
+       
+        while( temp){
+            
+           temp->next = temp->next->next;
+            
+          if(temp1->next!=NULL)  temp1->next = temp1->next->next;
+           else temp1->next = NULL;
+            
+         
+            temp = temp->next;
+            temp1 = temp1->next;
+        }
         return newHead;
     }
 };
