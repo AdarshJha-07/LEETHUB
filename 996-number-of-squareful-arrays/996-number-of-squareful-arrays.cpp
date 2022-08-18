@@ -11,10 +11,8 @@ class Solution {
             
             if(prev>=0 &&!isPerfect(nums[i] + nums[prev]))continue;
             
-            if(i>0 && nums[i] == nums[i-1] &&(mask&(1<<(i-1))))continue;
+            if(i>0 && nums[i] == nums[i-1] &&!(mask&(1<<(i-1))))continue;
             if(!(mask&(1<<i)) ){
-                
-             
                     t += solve(i , mask|(1<<i), nums);                
             }
         }
