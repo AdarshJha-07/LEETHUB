@@ -23,10 +23,7 @@ public:
             {
                 j++;
             }   
-            else if(nums[j] + nums[h] == tar)
-            {
-                  return target;
-            }
+           
             else{
                     h--;
                 }
