@@ -41,7 +41,7 @@ public:
         
 //         for(int r = 0; r < arr.size(); r++){
 //             sum += arr[r];
-//             while(sum > k){
+//             while(l <= r and sum >= k){
 //                 sum -= arr[l];
 //                 l++;
 //             }
