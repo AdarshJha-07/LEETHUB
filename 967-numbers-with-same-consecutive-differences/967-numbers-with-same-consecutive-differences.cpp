@@ -1,13 +1,13 @@
 class Solution {
     int n , k;
     vector<int>ans;
-    set<int>st;
+  //  set<int>st;
     void solve( int i , int op){
         
         if( i == n-1)
         {
-           // ans.push_back(op);
-            st.insert(op);
+            ans.push_back(op);
+           // st.insert(op);
             return;
         }
         
@@ -15,7 +15,7 @@ class Solution {
         if(last + k <= 9)
            solve( i+1 ,op*10 + last + k );
         
-        if(last - k >= 0)
+        if(last - k >= 0 && k!=0 )
             solve( i+1 , op*10 +last - k);
         
         
@@ -30,9 +30,9 @@ public:
             solve(0 , i);
         }
         
-        for(auto it: st){
-            ans.push_back(it);
-        }
+//         for(auto it: st){
+//             ans.push_back(it);
+//         }
         return ans;
     }
 };
