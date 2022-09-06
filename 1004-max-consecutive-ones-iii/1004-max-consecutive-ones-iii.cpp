@@ -6,7 +6,7 @@ public:
         int z  = k;
         int ans = INT_MIN;
         
-        unordered_map<int,set<int>>ump;
+        unordered_map<int,int>ump;
         
         while( r<nums.size() )
         {
@@ -19,17 +19,18 @@ public:
                 if(z>0)
                 {
                      z--;
-                     ump[0].insert(r);
+                     // ump[0].insert(r);
+                    ump[r]++;
                      r++;
                 }
                 else{
-                    while(l<r && ump[0].find(l) == ump[0].end())
+                    while(l<r && ump[l] == 0)
                     {
                         l++;
                     }
-                   if(ump[0].find(l) != ump[0].end()) 
+                   if(ump[l]) 
                    {
-                       ump[0].erase(l);
+                      ump[l] = 0;
                        l++;
                        z++;
                    }
@@ -38,7 +39,7 @@ public:
                 }
                 
             }
-           //  cout<<l<<" "<<r<<endl;
+         
             ans = max(ans , r-l);
         }
         
