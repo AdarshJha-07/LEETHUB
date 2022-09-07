@@ -11,24 +11,26 @@ public:
             for( auto it:  graph[i])
             {
                 adj[it].push_back(i);
-                indegree[it]++;
+              
                 outdegree[i]++;
             }
         }
           queue<int>q;
         
-        for( int i = 0; i<outdegree.size(); i++)
+        for( int i = outdegree.size() - 1; i>=0; i--)
         {
             if(outdegree[i] == 0)q.push(i);
         }
         
         vector<int>ans;
-        
-        while(!q.empty()){
+        vector<int>vis(graph.size(),0);
+        while(!q.empty())
+        {
             
             int u = q.front();
             q.pop();
-            ans.push_back(u);
+           // ans.push_back(u);
+            vis[u] = 1;
             for( auto it: adj[u]){
              
                 if(--outdegree[it] == 0) q.push(it);
@@ -36,7 +38,9 @@ public:
             
         }
       
-        sort(ans.begin(),ans.end());
+      for( int i =0; i<vis.size(); i++){
+          if(vis[i] == 1) ans.push_back(i);
+      }
         
         return ans;
     }
