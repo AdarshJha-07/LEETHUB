@@ -1,16 +1,35 @@
 class Solution {
 public:
-    int maximumRobots(vector<int>& times, vector<int>& costs, long long budget) {
-        long long i = 0, j, sum = 0, n = times.size();
-        multiset<int> s;
-        for (int j = 0; j < n; ++j) {
-            sum += costs[j];
-            s.insert(times[j]);
-            if (*rbegin(s) + sum * (j - i + 1) > budget) {
-                sum -= costs[i];
-                s.erase(s.find(times[i++]));
+    int maximumRobots(vector<int>& cT, vector<int>& rC, long long budget) {
+        multiset<int>st;
+        int ans = 0;
+        int i=0;
+        long long sum = 0;
+        long long cost = 0;
+        
+        for( int j=0; j<cT.size(); j++){
+             
+            st.insert(cT[j]);
+            sum += rC[j];
+            cost = *(--st.end()) + (j-i+1)*1LL*sum;
+        
+         
+              while( i<=j && cost > budget){
+                  sum -= rC[i];
+                  st.erase(st.find(cT[i]));
+                  i++;
+                  if( i > j) cost = 0;
+                  else{
+                      cost = *(rbegin(st)) + (j-i+1)*1LL*(sum);
+                      
+                  }
+                  
+              }
+                
+            ans = max( ans , j - i + 1);
+            
             }
-        }
-        return n - i;
+        
+    return ans;    
     }
 };
