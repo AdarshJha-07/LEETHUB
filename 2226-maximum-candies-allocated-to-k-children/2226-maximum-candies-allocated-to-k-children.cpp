@@ -12,7 +12,7 @@ class Solution {
 public:
     int maximumCandies(vector<int>& candies, long long k) {
      
-    sort(candies.begin(),candies.end());
+   // sort(candies.begin(),candies.end());
         
     long long ans = 0;
       
@@ -31,7 +31,7 @@ public:
         }
         mid = (low + high)>>1;
     }
-     //cout<<low<<" "<<high<<endl;   
+    
     return high;
         
   }
