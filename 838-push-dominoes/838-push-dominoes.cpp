@@ -1,33 +1,41 @@
 class Solution {
 public:
-    string pushDominoes(string s) {   
-        
-     int N = s.size(), right = -1;
-    for (int i = 0; i < N; ++i) {
-        if (s[i] == 'L') {
-            if (right == -1) { 
-                // Step 2
-                for (int j = i - 1; j >= 0 && s[j] == '.'; --j) {
-                  s[j] = 'L';  
-                } 
-            } else {
-                // Step 8
-                for (int j = right + 1, k = i - 1; j < k; ++j, --k) {
-                    s[j] = 'R';
-                    s[k] = 'L';
-                } 
-                right = -1;
+   string pushDominoes(string s) {
+      
+       int n = s.length();
+        vector<int> l(n, 0), r(n, 0);
+        char prev = '.';
+        int count = 1;
+        for(int i=0; i<n; i++){
+            if(s[i] == 'R'){
+                prev = 'R';
+                count = 1;
+                continue;
             }
-        } else if (s[i] == 'R') {
-            if (right != -1) {
-                for (int j = right + 1; j < i; ++j) s[j] = 'R';
-            }
-            right = i;
+            else if(s[i] == 'L') prev = 'L';
+            if(prev == 'R' && s[i] == '.') r[i] = count++;
         }
-    }
-    if (right != -1) {
-        for (int j = right + 1; j < N; ++j) s[j] = 'R';
-    }
-    return s;
+        prev = '.';
+        count = 1;
+        for(int i=n-1; i>=0; i--){
+            if(s[i] == 'L'){
+                prev = 'L';
+                count = 1;
+                continue;
+            }
+            else if(s[i] == 'R') prev = 'R';
+            if(prev == 'L' && s[i] == '.') l[i] = count++;
+        }
+        string ans = "";
+        for(int i=0; i<n; i++){
+            if(!l[i] && !r[i]) ans += s[i];
+            else if(!l[i]) ans += 'R';
+            else if(!r[i]) ans += 'L';
+            else if(l[i] == r[i]) ans += '.';
+            else if(l[i] > r[i]) ans += 'R';
+            else ans += 'L';
+        }
+        return ans;
+        
     }
 };
