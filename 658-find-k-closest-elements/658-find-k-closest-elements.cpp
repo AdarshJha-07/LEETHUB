@@ -2,9 +2,7 @@ class Solution {
 public:
     vector<int> findClosestElements(vector<int>& arr, int k, int x) {
         
-        unordered_map<int,int>ump;
-        
-        for(int i = 0; i<arr.size(); i++) ump[arr[i]] ++;
+ 
         
         vector<pair<int,int>>v;
         for(int j = 0; j < arr.size(); j++) 
