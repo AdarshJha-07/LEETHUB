@@ -25,8 +25,10 @@ public:
             curr1+=(nums1[it]);
             curr2+=nums2[it];
             mx2=max(mx2,(curr2-curr1));
-            if(curr2-curr1<0){
-                curr1=curr2=0;}
+            if(curr2-curr1<0)
+            {
+                curr1=curr2=0;
+            }
         }
    
 
