@@ -9,52 +9,45 @@ public:
                 break;
             }
         }
-        // vector<int>left(n,0);     
-        // vector<int>right(n,0);
-        
+        vector<int>left(n,0);     
+        vector<int>right(n,0);
+        // cout<<ind<<endl;
         unordered_map<int,int>ump;
-          // int less = 0,grt = 0;
-        int diff = 0;
+           int less = 0,grt = 0;
         for(int i = ind+1; i<n; i++)
         { 
             if(nums[i] < nums[ind])
             {
-                // less++;
-                diff--;
+                less++;
             }
            else
-               diff++;
-        
-            
-           ump[diff]++;
+               grt++;
+           right[i] = grt - less;
+           ump[right[i]]++;
         }
          ump[0]++;
-     //  less = 0,grt = 0;
-        diff = 0;
+       less = 0,grt = 0;
         int ans = 0;
-        if(ump.find(1)!= ump.end())
-        {
+        if(ump.find(1)!= ump.end()){
               ans += ump[1];
-        }
-        if(ump.find(0) != ump.end())
-        {
+           }
+        if(ump.find(0) != ump.end()){
             ans += ump[0];
-        }
-           
+        }   
         
        for(int i = ind-1; i>= 0; i--){
            if(nums[i] < nums[ind]){
-               diff--;
+               less++;
            }
            else
-               diff++;
-           //left[i] = grt - less;
+               grt++;
+           left[i] = grt - less;
            //cout<<left[i]<<" ";
-           if(ump.find(1-diff)!= ump.end()){
-              ans += ump[1-diff];
+           if(ump.find(1-left[i])!= ump.end()){
+              ans += ump[1-left[i]];
            }
-           if(ump.find(-diff) != ump.end()){
-               ans += ump[-diff];
+           if(ump.find(-left[i]) != ump.end()){
+               ans += ump[-left[i]];
            }
            
        }
