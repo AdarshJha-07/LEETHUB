@@ -52,28 +52,14 @@ class Solution {
         return;
     }
 public:
-    int maxAncestorDiff(TreeNode* root) {
-         solve(root,INT_MIN);
-         solve2(root,INT_MAX);
-        solve3(root,INT_MAX);
-        solve4(root,INT_MIN);
-        int ans = INT_MIN;
-        for(auto it: ump){
-            //cout<<it.first<<" "<<it.second<<" "<< ump2[it.first]<<endl;
-            if(ans < abs(it.second - ump2[it.first]))
-            {
-                ans = abs(it.second - ump2[it.first]);
-               // cout<<it.first<<" "<<it.second<<" "<< ump2[it.first]<<endl;
-            }
-        }
-        for(auto it: ump3){
-          //  cout<<it.first<<" "<<it.second<<" "<< ump2[it.first]<<endl;
-            if(ans < abs(it.second - ump4[it.first]))
-            {
-                ans = abs(it.second - ump4[it.first]);
-               // cout<<it.first<<" "<<it.second<<" "<< ump2[it.first]<<endl;
-            }
-        }
-        return ans;
+ 
+    int maxAncestorDiff(TreeNode* root, int mini = INT_MAX, int maxi = INT_MIN) {
+        // base case
+        if (!root) return (maxi - mini);
+        // update mini and maxi
+        mini = min(mini, root->val), maxi = max(maxi, root->val);
+        // finding the maximum distance we would like to find by going left and right
+        return max(maxAncestorDiff(root->left, mini, maxi), maxAncestorDiff(root->right, mini, maxi));
     }
+    
 };
